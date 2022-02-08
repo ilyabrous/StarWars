@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">StartWarsApi</string>
+    <string name="action_find">Try Find</string>
+    <string name="field_name">What is character\'s name?</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+
+    <string name="save_error">Save error</string>
+    <string name="delete_error">Delete error</string>
+    <string name="internet_error">Check Internet Connection</string>
+    <string name="local_error">Local Error</string>
+    <string name="unexpected_error">Unexpected error!</string>
+    <string name="coroutines_error">Coroutines error!</string>
+
+    <string name="save_successfully">Character is saved!</string>
+</resources>
