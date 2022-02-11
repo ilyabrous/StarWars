@@ -1,5 +1,6 @@
 package com.example.starwarsapi.presentation.ui.main.tabs.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,11 +19,14 @@ import com.example.starwarsapi.domain.usecases.GetCharactersByNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+//todo stupid logic. in each viewmodel i have showEvent, i think i have to create a BaseViewModel
 @HiltViewModel
 class SearchFragmentViewModel @Inject constructor(
     private val getCharactersByNameUseCase: GetCharactersByNameUseCase,
@@ -43,27 +47,32 @@ class SearchFragmentViewModel @Inject constructor(
     private val userIdsInProgress = mutableSetOf<Long>()
 
     private var flow : Job? = null
-    private val handlerException = CoroutineExceptionHandler { _, _ ->
+    private val handlerException = CoroutineExceptionHandler { con, thr ->
+        Log.d("AAA", "Coroutine exception $con and stack trace ${thr.stackTrace} \n ${thr.message} cause ${thr.cause} \n $thr")
         showError(R.string.coroutines_error)
     }
 
     fun findCharacters(characterNameParam: CharacterNameParam)  {
         flow?.cancel()
-
-        flow = getCharactersByNameUseCase(characterNameParam).onEach { result ->
-            when(result) {
-                is Resource.Success -> {
-                    _uiStateLiveData.value = SearchUiState(isLoading = false, characterItems = result.data)
-                }
-                is Resource.Error -> {
-                    _uiStateLiveData.value = SearchUiState(isLoading = false)
-                    showError(result.message)
-                }
-                is Resource.Loading -> {
-                    _uiStateLiveData.value = SearchUiState(isLoading = true)
+        flow = viewModelScope.launch {
+            delay(500)
+            getCharactersByNameUseCase(characterNameParam).collect { result ->
+                when(result) {
+                    is Resource.Success -> {
+                        _uiStateLiveData.value = SearchUiState(isLoading = false, characterItems = result.data)
+                    }
+                    is Resource.Error -> {
+                        _uiStateLiveData.value = SearchUiState(isLoading = false)
+                        showError(result.message)
+                    }
+                    is Resource.Loading -> {
+                        _uiStateLiveData.value = SearchUiState(isLoading = true)
+                    }
                 }
             }
-        }.launchIn(viewModelScope)
+        }
+
+
 
     }
 
@@ -107,7 +116,7 @@ class SearchFragmentViewModel @Inject constructor(
                     showError(R.string.save_error)
                 }
             }
-
+            //todo stupid because if coroutine is broken code is unreached
             showProgressItem(id, false)
         }
 
@@ -181,6 +190,8 @@ class SearchFragmentViewModel @Inject constructor(
 
 }
 
+//todo copy from google like example handling uiState but it is hard always create a full state... maybe observe few private live date to something action in domain
+// and using mediatorLiveData combine for UiState?
 data class SearchUiState(
     val isLoading: Boolean = false,
     val characterItems: List<CharacterItemUiState> = listOf(),

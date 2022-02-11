@@ -49,6 +49,7 @@ android {
     viewBinding {
         enabled = true
     }
+
 }
 
 

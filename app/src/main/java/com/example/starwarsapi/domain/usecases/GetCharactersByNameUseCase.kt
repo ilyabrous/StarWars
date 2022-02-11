@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.map
 import java.lang.Exception
 import javax.inject.Inject
 
+
+//todo i think it is stupid mapping in domain data class to uiState..... because domain is isolated layer..
 class GetCharactersByNameUseCase@Inject constructor (
     private val characterRepository: CharacterRepository,
 ) {

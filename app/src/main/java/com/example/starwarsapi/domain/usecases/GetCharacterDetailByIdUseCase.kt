@@ -2,6 +2,7 @@ package com.example.starwarsapi.domain.usecases
 
 import android.util.Log
 import com.example.starwarsapi.R
+import com.example.starwarsapi.domain.NetworkException
 import com.example.starwarsapi.domain.Resource
 import com.example.starwarsapi.domain.StorageException
 import com.example.starwarsapi.domain.models.Character
@@ -21,17 +22,23 @@ class GetCharacterDetailByIdUseCase @Inject constructor (
         var character : Character
         return try {
             character = characterRepository.getLocalCharacterDetailById(characterId = CharacterId(characterId.id))
+            Log.d("AAA", "Got local ${character.name}")
             Resource.Success(character)
         } catch (e: Exception) {
-            Log.d("AAA", "getting local character thrown error. Try get remote")
-            character = characterRepository.getRemoteCharacterDetailById(characterId = CharacterId(characterId.id))
-            Resource.Success(character)
-        } catch (e: HttpException) {
-            Resource.Error(R.string.internet_error)
-        } catch (e: StorageException) {
-            Resource.Error(R.string.local_error)
-        } catch (e: Exception) {
-            Resource.Error(R.string.unexpected_error)
+            try {
+                character = characterRepository.getRemoteCharacterDetailById(characterId = CharacterId(characterId.id))
+                Log.d("AAA", "Got remote ${character.name}")
+                Resource.Success(character)
+            } catch (e: NetworkException) {
+                Resource.Error(R.string.internet_error)
+            } catch (e: HttpException) {
+                Resource.Error(R.string.internet_error)
+            } catch (e: StorageException) {
+                Resource.Error(R.string.local_error)
+            } catch (e: Exception) {
+                Resource.Error(R.string.unexpected_error)
+            }
+
         }
 
     }

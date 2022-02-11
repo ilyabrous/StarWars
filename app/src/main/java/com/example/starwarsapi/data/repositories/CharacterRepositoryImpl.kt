@@ -1,5 +1,6 @@
 package com.example.starwarsapi.data.repositories
 
+import android.util.Log
 import com.example.starwarsapi.data.DataHelper
 import com.example.starwarsapi.data.remote.retrofit.CharacterApi
 import com.example.starwarsapi.data.local.LocalDataStorage
@@ -21,8 +22,10 @@ class CharacterRepositoryImpl(
     override suspend fun getRemoteCharactersByName(characterNameParam: CharacterNameParam): List<CharacterName> = withContext(ioDispatcher) {
 
         //todo may i add throw if name is empty? or add it logic into just use case?
-
+        //think how i can thrown expection in repository??
         val listCharacterDto = api.getCharactersByName(name = characterNameParam.name).CharacterDto
+
+
 
         val listCharacterName = listCharacterDto.map { characterDto ->
             CharacterName(
@@ -50,7 +53,7 @@ class CharacterRepositoryImpl(
         return localDataStorage.isSavedCharacter(characterId.id)
     }
 
-    //todo strange mapping
+    //todo strange mapping. How to implement good mapping. if a class for model and domain is same?? where should i do mapping?
     //use only local
     override suspend fun getLocalAllFavoriteCharacters(): Flow<List<CharacterFavorite>> = wrapSQLiteException(ioDispatcher) {
         val flowOfList = localDataStorage.getLocalAllFavoriteCharacters()

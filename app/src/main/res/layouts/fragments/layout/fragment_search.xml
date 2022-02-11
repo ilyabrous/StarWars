@@ -17,11 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/field_name"
-            app:layout_constraintBottom_toTopOf="@+id/searchButton"
-            android:layout_marginTop="@dimen/large_space"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/searchButton"
             app:layout_constraintVertical_chainStyle="packed">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -37,21 +36,21 @@
         <Button
             android:id="@+id/searchButton"
             style="@style/GlobalTextInputStyle.Big"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
-            android:layout_marginTop="@dimen/large_space"
             android:text="@string/action_find"
+            app:layout_constraintTop_toTopOf="@id/characterTextInput"
+            app:layout_constraintBottom_toBottomOf="@id/characterTextInput"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/characterTextInput" />
+            app:layout_constraintStart_toEndOf="@id/characterTextInput" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/characterRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/large_space"
+            android:layout_marginTop="@dimen/medium_space"
             app:layout_constraintTop_toBottomOf="@id/searchButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,10 +62,11 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchButton"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

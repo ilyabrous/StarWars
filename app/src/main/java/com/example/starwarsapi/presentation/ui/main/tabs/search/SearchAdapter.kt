@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsapi.R
 import com.example.starwarsapi.databinding.ItemFoundCharacterBinding
 
+//todo this adapter almost like favorite adapter... i think it is stupid
 class SearchAdapter(
     private val listener: Listener
 ) : RecyclerView.Adapter<SearchAdapter.Holder>(), View.OnClickListener {

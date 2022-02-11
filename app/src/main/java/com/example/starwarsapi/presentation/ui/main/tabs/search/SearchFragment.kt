@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -33,6 +34,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val name = binding.characterEditText.text.toString()
             val characterNameParam = CharacterNameParam(name = name)
             viewModel.findCharacters(characterNameParam)
+        }
+        binding.characterEditText.addTextChangedListener { editable ->
+            if(editable.toString().isNotEmpty()) {
+                val characterNameParam = CharacterNameParam(name = editable.toString())
+                viewModel.findCharacters(characterNameParam)
+            }
         }
 
         val adapter = setupList()

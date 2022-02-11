@@ -1,9 +1,19 @@
-This is first version of StarWars application for EasyCode..
+This is second version of StarWars application for EasyCode..
+
+All my thoughts in code were marked in code by TODO. They can be strongly stupid :-)
+
+structure
+-data
+-domain
+-presentation
 
 I think i need to:
--on the search screen change input for searching so that user wrote a new letter after 500ml start searching.
--may add a pagination(now if we start search with clear query, then we will get a first page of characters
--may change flow to sharedFlow?
--may remove stupid classes like CharacterId, when we have one param
+-may add a pagination(now if we start search with clear query, then we will get a first page of characters(i didn't notice that we get a few pages of characters)
+-may change flow to sharedFlow? and how to implement use case logic more correctly
+should i use more sealed class? more uiState classes?
+-may remove stupid classes like CharacterId, CharacterNameParam when we have one param
 -check analyze a code state
+-rename stupid variable
+-when user delete character from favorite don`t delete immediately only after snackbar is went
+-add DiffUtils to Recycler
 

@@ -25,9 +25,12 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
 
         val adapter = setupList()
 
-        viewModel.characterLiveData.observe(viewLifecycleOwner) { character ->
-            val characterItemList = parseCharacterToList(character = character)
-            adapter.itemList = characterItemList
+        viewModel.characterUiStateLiveData.observe(viewLifecycleOwner) { state ->
+            Log.d("AAA" , "$state")
+            binding.progressBar.visibility = if(state.isLoading) View.VISIBLE else View.INVISIBLE
+            if(state.character != null) {
+                adapter.itemList =  parseCharacterToList(state.character)
+            }
         }
 
         val id = requireArguments().getLong(ARG_CHARACTER_ID, 1)

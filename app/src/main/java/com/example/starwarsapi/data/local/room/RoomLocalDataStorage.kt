@@ -121,7 +121,7 @@ class RoomLocalDataStorage(
         return characterDao.getAllFavoriteCharacters()
     }
 
-    //todo replace mb? id->CharacterId
+    //todo replace mb? id->CharacterId because we have one param
     override suspend fun getLocalCharactersDetailById(id: Long): CharacterAndAllReferencesTuple {
         return characterDao.getCharacterById(characterId = id)
     }
