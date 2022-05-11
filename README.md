@@ -1,19 +1,10 @@
-This is second version of StarWars application for EasyCode..
+### Star Wars
 
-All my thoughts in code were marked in code by TODO. They can be strongly stupid :-)
+Stack: Clear Arch, Use Cases. MVVM, Dagger Hilt, Coroutines, Flow, Jetpack Navigation, Room, Retrofit.
+Api: https://swapi.dev
 
-structure
--data
--domain
--presentation
+Три слоя архитектуры: data, domain, presentation. Переиспользование логики в Use Cases. Использование Dagger Hilt для внедрения зависимостей. База данных, которая хранит закешированных персонажей. Отношение MxN, т.к каждый персонаж может иметь много фильмов, машин и прочего, и так-же наоборот: каждый фильм имеет много актеров, например. Поэтому продуманна логика разбития на crossRefTables. Сохранение каждых данных в подходяших таблицах.
 
-I think i need to:
--may add a pagination(now if we start search with clear query, then we will get a first page of characters(i didn't notice that we get a few pages of characters)
--may change flow to sharedFlow? and how to implement use case logic more correctly
-should i use more sealed class? more uiState classes?
--may remove stupid classes like CharacterId, CharacterNameParam when we have one param
--check analyze a code state
--rename stupid variable
--when user delete character from favorite don`t delete immediately only after snackbar is went
--add DiffUtils to Recycler
+![](https://media.giphy.com/media/dkIRONffYSabFafOLn/giphy.gif)
+
 
