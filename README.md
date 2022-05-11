@@ -1,4 +1,4 @@
-### Star Wars
+### Star Wars. In Developming
 
 Stack: Clear Arch, Use Cases. MVVM, Dagger Hilt, Coroutines, Flow, Jetpack Navigation, Room, Retrofit.
 Api: https://swapi.dev
