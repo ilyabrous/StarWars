@@ -10,6 +10,7 @@ Api: https://swapi.dev
 
 <br/>
 
-![](https://media.giphy.com/media/po9HkUH3VRq3N0Hzyp/giphy.gif)
-
+Search   |  Flow 
+:-------------------------:|:-------------------------:
+![](https://media.giphy.com/media/po9HkUH3VRq3N0Hzyp/giphy.gif)  |  ![](https://media.giphy.com/media/h1jvI5VfatifFG7mNb/giphy.gif) |
 
