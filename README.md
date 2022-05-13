@@ -8,7 +8,7 @@ Api: https://swapi.dev
 -useCases, data(dataSources), domain(Repository, Use Cases), presntaion(uiState) слои.<br/>
 -связи в бд MxN т.к каждый персонаж может иметь много фильмов, машин и прочего, и так-же наоборот: каждый фильм имеет много актеров, например. <br/>
 
-
+<br/>
 
 ![](https://media.giphy.com/media/yp1JvHabcLGLc5C8QC/giphy.gif)
 
